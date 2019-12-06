@@ -47,6 +47,80 @@ h1 {
     top: 0;
 }
 
+video {
+  z-index: 0;
+}
+
+#video_box {
+  float: left;
+}
+#video_advertisement {
+  position: absolute;
+  float: left;
+  width: 640px;
+  min-height: 370px;
+  background-color: #fff;
+  z-index: 300000;
+  padding: 20px;
+  margin-left: 20px;
+  border: 1px solid black;
+}
+
+#content-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#content-container div {
+  margin-right: 20px;
+}
+
+.question-section {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.question-section label {
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4caf50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4caf50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
 @media (min-width:320px) and (max-width:767px) {
     h1 {
         font-size: 30px;
@@ -6219,6 +6293,13 @@ nav .show-sub {
     overflow: auto;
     max-height: 336px
 }
+
+#submit-questionnaire {
+  background: #4caf50; /* Green background */
+  color: white;
+  font-weight: bold;
+}
+
 
 @media (min-width:1280px) and (max-width:1499px) {
     .npo-kids .npo-dropdown .dropdown-content {

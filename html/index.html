@@ -30,6 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script>
         var tabs = new Array();
@@ -116,12 +117,44 @@
                 </div>
                 <div class="npo-header-episode-content">
                     <h1> Dwars Door De Week </h1>
-                    <div class="npo-header-episode-thumb">
-                        <video id="video_player" width="100%" height="100%" controls>
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
+                    <div id="content-container">
+                        <div id="video_advertisement">
+                          <div id="question-gender" class="question-section">
+                            <label>Geslacht</label>
+                            <span>Man</span><input type="radio" name="gender" value="male" />
+                            <br />
+                            <span>Vrouw</span><input type="radio" name="gender" value="female" />
+                            <br />
+                          </div>
+                          <div id="question-relationship-container" class="question-section">
+                            <label>Burgerlijke staat</label>
+                            <input type="checkbox" name="relation" value="single" />
+                            <span>Single</span>
+                            <br />
+                            <input type="checkbox" name="relation" value="relationship" />
+                            <span>In relatie</span>
+                            <br />
+                            <input type="checkbox" name="relation" value="married" />
+                            <span>Getrouwd</span>
+                            <br />
+                            <input type="checkbox" name="relation" value="living-together" />
+                            <span>Samenwonend</span>
+                            <br />
+                          </div>
+                          <div class="question-section slider-container">
+                            <label>Leeftijd</label>
+                            <label id="age-value-label">10</label>
+                            <input type="range" min="8" max="100" value="10" class="slider" id="age-slider" />
+                          </div>
+                          <button id="submit-questionnaire">Indienen</button>
+                        </div>
+                      <div class="npo-header-episode-thumb" id="video_boxfire">
+                          <video id="video_player" width="100%" height="100%" controls>
+                              <source id="video_player_src" src="../video/Adidas.mp4" type="video/mp4">
+                              <source id="video_player_src_real" src="../video/NOS_journaal.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                          </video>
+                      </div>
                     <section class="npo-header-episode-meta">
                         <h2>Dwars Door De Week</h2>
                         <span>
@@ -134,7 +167,7 @@
 
                         <div class="npo-header-episode-meta-content">
                             <div id="metaContent">
-                                <p class="summary_short">Satire op de zaterdagavond! Sophie Hilbrand speelt met twee bekende gasten een nieuwsquiz waarin de opvallendste gebeurtenissen van de afgelopen week worden besproken.</p>
+                                <p class="summary_short">Satire op de zaterdagavond! Soplie Hilbrand speelt met twee bekende gasten een nieuwsquiz waarin de opvallendste gebeurtenissen van de afgelopen week worden besproken.</p>
                                 <p class="summary_long"></p>
                                 <span class="availability" data-from="2017-10-28T20:29:57Z" data-to="" data-prediction="" data-premium-from="2017-10-28T20:29:57Z" data-premium-to="" data-premium-prediction="" data-is-premium="">
                                 </span>
@@ -145,7 +178,7 @@
                         </div>
 
                         <a href="https://www.npostart.nl/dwars-door-de-week/BV_101384492" title="" class="npo-episode-header-program-info">
-                            <img src="https://www-assets.npo.nl/uploads/media_item/media_item/225/12/dddw_guide_highlight-1525846110.png" alt=""> Dwars Door De Week >
+                            <img src="https://images2.persgroep.net/rcs/1On51oxSo2NHu42Ab8MBGj0315U/diocontent/128284845/_crop/1/45/699/394/_fitwidth/763?appId=93a17a8fd81db0de025c8abd1cca1279&quality=0.8" alt=""> Dwars Door De Week >
                         </a>
 
                         <div class="share-footer">
@@ -167,6 +200,7 @@
                             </div>
                         </div>
                     </section>
+                    </div>
                 </div>
             </div>
         </header>
@@ -697,6 +731,29 @@
                     "query-input": "required name=search_term_string"
                 }
             }
+        </script>
+        <script>
+        document.getElementById('age-slider').oninput = function sliderUpdate(val) {
+          document.getElementById('age-value-label').innerHTML = val.target.value;
+        }
+        document.getElementById('submit-questionnaire').onclick = function playAdd() {
+          document.getElementById('video_advertisement').style.display = "none";
+          const videoSrc = document.getElementById('video_player_src').src;
+          const video = document.getElementById('video_player');
+          const videoSrcReal = document.getElementById('video_player_src_real').src;
+          video.play();
+
+          video.addEventListener('ended', playVideo, false);
+
+          function playVideo(e) {
+            video.src.className = "";
+            videoSrcReal.className = "active";
+
+            video.src = "../video/NOS_journaal.mp4"
+
+            video.play();
+          }
+        }
         </script>
 </body>
 
