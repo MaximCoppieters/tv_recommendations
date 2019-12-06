@@ -1,7 +1,5 @@
 var fs = require("fs");
 var path = require("path");
-const readline = require("readline");
-const csv = require("csvtojson");
 const Program = require("./model/program");
 
 filePath = path.join(__dirname, "metadata_trunc.csv");

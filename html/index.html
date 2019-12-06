@@ -4,17 +4,60 @@
     <meta charset="utf-8" />
     <title>Express and Webpack App</title>
     <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
   </head>
   <body>
     <div id="watch-container">
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/UFIoRLqhFpo"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
+      <div id="video-container">
+        <div id="video_box">
+          <div id="video_advertisement">
+            <div id="question-gender" class="question-section">
+              <label>Geslacht</label>
+              <span>Man</span><input type="radio" name="gender" value="male" />
+              <br />
+              <span>Vrouw</span
+              ><input type="radio" name="gender" value="female" />
+              <br />
+            </div>
+            <div id="question-relationship-container" class="question-section">
+              <label>Burgerlijke staat</label>
+              <input type="checkbox" name="relation" value="single" />
+              <span>Single</span>
+              <br />
+              <input type="checkbox" name="relation" value="relationship" />
+              <span>In relatie</span>
+              <br />
+              <input type="checkbox" name="relation" value="married" />
+              <span>Getrouwd</span>
+              <br />
+              <input type="checkbox" name="relation" value="living-together" />
+              <span>Samenwonend</span>
+              <br />
+            </div>
+            <div class="question-section slider-container">
+              <label>Leeftijd</label>
+              <input
+                type="range"
+                min="8"
+                max="100"
+                value="21"
+                class="slider"
+                id="myRange"
+              />
+            </div>
+          </div>
+          <div>
+            <video
+              id="player"
+              src="http://sandbox.app-solut.com/blog/OverlayDemo/movies/big_buck_bunny.ogv"
+              type="video/mp4"
+              onclick="this.play();"
+            >
+              Your browser does not support this streaming content.
+            </video>
+          </div>
+        </div>
+      </div>
       <div id="watch-description-container">
         <div id="title">
           Littekens
