@@ -1,81 +1,703 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Express and Webpack App</title>
-    <link rel="shortcut icon" href="#" />
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
-  </head>
-  <body>
-    <div id="watch-container">
-      <div id="video-container">
-        <div id="video_box">
-          <div id="video_advertisement">
-            <div id="question-gender" class="question-section">
-              <label>Geslacht</label>
-              <span>Man</span><input type="radio" name="gender" value="male" />
-              <br />
-              <span>Vrouw</span
-              ><input type="radio" name="gender" value="female" />
-              <br />
-            </div>
-            <div id="question-relationship-container" class="question-section">
-              <label>Burgerlijke staat</label>
-              <input type="checkbox" name="relation" value="single" />
-              <span>Single</span>
-              <br />
-              <input type="checkbox" name="relation" value="relationship" />
-              <span>In relatie</span>
-              <br />
-              <input type="checkbox" name="relation" value="married" />
-              <span>Getrouwd</span>
-              <br />
-              <input type="checkbox" name="relation" value="living-together" />
-              <span>Samenwonend</span>
-              <br />
-            </div>
-            <div class="question-section slider-container">
-              <label>Leeftijd</label>
-              <input
-                type="range"
-                min="8"
-                max="100"
-                value="21"
-                class="slider"
-                id="myRange"
-              />
-            </div>
-          </div>
-          <div>
-            <video
-              id="player"
-              src="http://sandbox.app-solut.com/blog/OverlayDemo/movies/big_buck_bunny.ogv"
-              type="video/mp4"
-              onclick="this.play();"
-            >
-              Your browser does not support this streaming content.
-            </video>
-          </div>
+<html lang="nl">
+
+<head>
+    <title>Prototype Media Hackday</title>
+    <meta name="description" content="Satire op de zaterdagavond! Sophie Hilbrand speelt met twee bekende gasten een nieuwsquiz waarin de opvallendste gebeurtenissen van de afgelopen week worden besproken.">
+
+    <meta property="og:url" content="https://www.npostart.nl/dwars-door-de-week/28-10-2017/BV_101384779">
+    <meta property="og:title" content="Dwars Door De Week gemist? Start met kijken op NPO Start">
+    <meta property="og:description" content="Satire op de zaterdagavond! Sophie Hilbrand speelt met twee bekende gasten een nieuwsquiz waarin de opvallendste gebeurtenissen van de afgelopen week worden besproken.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.poms.omroep.nl/image/sx650/967199.jpg">
+    <meta property="og:site_name" content="www.npostart.nl">
+    <meta property="og:video" content="https://www.npostart.nl/dwars-door-de-week/28-10-2017/BV_101384779">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@publiekeomroep">
+    <meta name="twitter:title" content="Dwars Door De Week gemist? Start met kijken op NPO Start">
+    <meta name="twitter:description" content="Satire op de zaterdagavond! Sophie Hilbrand speelt met twee bekende gasten een nieuwsquiz waarin de opvallendste gebeurtenissen van de afgelopen week worden besproken.">
+    <meta name="twitter:creator" content="@publiekeomroep">
+    <meta name="twitter:image:src" content="https://images.poms.omroep.nl/image/sx650/967199.jpg">
+    <meta name="twitter:domain" content="www.npostart.nl">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="generator" content="NPO.release-1.56.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+
+    <script>
+        var tabs = new Array();
+        var editPicker = new Array();
+        var placeholdersLoaded = !!'1';
+        var placeholdersLoadingEvent = (function() {
+            var event = document.createEvent('Event');
+            event.initEvent('placeholders_loaded', true, true);
+            return event;
+        })();
+    </script>
+    <!--
+    <script type="text/javascript">
+        (function () {
+            var ccmWrapperElement = document.createElement('script'); var organisation = 'NPO';
+            var site = 'npostart.nl';
+            var ccmWrapperVersion = 'v1.1';
+            var ccmDomain = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'ccm.npostart.nl';
+            ccmWrapperElement.type = 'text/javascript'; ccmWrapperElement.crossOrigin = 'anonymous';
+            ccmWrapperElement.src = ccmDomain + '/sites/' + organisation + '/' + site
+                + '/ccm-wrapper_' + ccmWrapperVersion + '.js'; ccmWrapperElement.async = true;
+            ccmWrapperElement.defer = ccmWrapperElement.async;
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ccmWrapperElement, s); window.addEventListener('CCM_Wrapper_ready', function (e) {
+                ccmWrapper.init(); }, false);
+        })();
+    </script>
+    <script type="text/javascript">
+        var accountProfile = '';
+                document.domain = 'npostart.nl';
+                var cookieModuleLoaded = false;
+        window.addEventListener('CCM_done', function() {
+            cookieModuleLoaded = true;
+        }, false);
+    </script>
+-->
+    <link rel="canonical" href="http://www.npostart.nl/dwars-door-de-week/28-10-2017/BV_101384779" />
+</head>
+
+<body class="npo-special ">
+    <div class="npo-app-banner" style="display: none">
+        <div class="npo-app-banner-info">
+            <a href="" title="Sluiten" class="npo-banner-close js-mobile-app-link"></a>
+            <figure class="npo-banner-icon"></figure>
+            <p>De NPO Start-app <span class="mobile-app-title"></span></p>
         </div>
-      </div>
-      <div id="watch-description-container">
-        <div id="title">
-          Littekens
-        </div>
-        <p id="upload-date">Gisteren 20:55 • EO • 40 min</p>
-        <p id="description">
-          Tygo ziet hoe het leven eruit kan zien als je een psychiatrisch label
-          draagt. Bij Jason zijn vanaf zijn elfe verkeerde diagnoses gesteld.
-        </p>
-        <div id="personalised-buttons">
-          <button onclick="">Volgen</button>
-          <button onclick="">Kijk later</button>
-          <button onclick="">Delen</button>
-        </div>
-      </div>
-      <div id="watch-options-container">
-        <div id="recommended-watch-options-container"></div>
-      </div>
+        <a href="" class="download-app js-mobile-app-link">Download</a>
     </div>
-  </body>
+    <div class="full-page-width">
+        <npo-navigation current-url="dwars-door-de-week/28-10-2017/BV_101384779" current-route="fragment-npostart" pages="[{&quot;label&quot;:&quot;Live&quot;,&quot;type&quot;:&quot;live&quot;,&quot;uri&quot;:&quot;\/live&quot;,&quot;softclick&quot;:&quot;&quot;},{&quot;label&quot;:&quot;Programma&#039;s&quot;,&quot;type&quot;:&quot;catalogue&quot;,&quot;uri&quot;:&quot;\/programmas&quot;,&quot;softclick&quot;:&quot;&quot;},{&quot;label&quot;:&quot;Gids&quot;,&quot;type&quot;:&quot;epg&quot;,&quot;uri&quot;:&quot;\/gids&quot;,&quot;softclick&quot;:&quot;&quot;}]" my-npo-url="https://www.npostart.nl/mijn_npo" account-settings-url="/settings" profile-switch-url="/api/account/@me/profile/switch" profile-settings-url="/profile/settings" account-verify-pin-code-url="/api/account/@me/pincode/verify" password-reset-link="https://account.npostart.nl/wachtwoord-vergeten" login-post_url="https://www.npostart.nl/api/login" signup-url="https://www.npostart.nl/aanmelden" login-url="https://www.npostart.nl/login" settings-url="https://www.npostart.nl/settings" search-url="https://www.npostart.nl/zoeken" welcome-url="https://www.npostart.nl/welcome" account-update-pin-code-url="/api/account/@me/pincode" account-verify-password-url="/api/account/@me/password" is-npo-kind=false>
+            <nav class="npo-menu">
+                <div class="container">
+                    <div class="npo-menu-navicon" tabindex="200">Menu</div><a href="#" title="NPO" class="npo-menu-logo"><img src="../images/npo-logo.png" alt="NPO"></a>
+                    <ul class="npo-pages desktop-nav">
+                        <li class=""><a href="/live">Live</a></li>
+                        <li class=""><a href="/programmas">Programma's</a></li>
+                        <li class=""><a href="/gids">Gids</a></li>
+                    </ul>
+                    <div class="npo-menu-user" data-search-is-visible="false">
+                        <div class="div-inline npo-menu-register"><a class="" href="https://www.npostart.nl/aanmelden">Probeer NPO Start Plus</a></div>
+                        <div class="npo-menu-kids"><span class="kidsLink">Kind</span></div>
+                        <div class="div-inline">
+                            <div style="display: inline-block;"><span class="npo-menu-user-visitor"><a href="#" title="Inloggen">Inloggen</a></span></div>
+                        </div>
+                        <div class="npo-menu-search"><span id="npo-search-toggle" tabindex="200"></span></div>
+                    </div>
+                    <ul class="npo-menu-mijn-npo ">
+                        <li><a href="https://www.npostart.nl/mijn_npo">Mijn NPO</a></li>
+                        <li><a href="/settings" title="Instellingen">Instellingen</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </npo-navigation>
+
+        <npo-agerestriction age-rating="ALL" profile-switch-url="/api/account/@me/profile/switch" account-verify-pin-code-url="/api/account/@me/pincode/verify" is-youth={false} password-reset-link="https://account.npostart.nl/wachtwoord-vergeten" account-update-pin-code-url="/api/account/@me/pincode" account-verify-password-url="/api/account/@me/password"></npo-agerestriction>
+        <header class="npo-header-episode" id="5dea4e7c2f118" data-episode="BV_101384779">
+            <div class="header-fallback-container">
+                <div class="header-fallback" style='background-image: url("https://images.poms.omroep.nl/image/sx650/967199.jpg")'></div>
+            </div>
+            <div class="container">
+                <div class="npo-header-bg-img">
+                    <div class="npo-header-gradient-left"></div>
+                    <div class="npo-header-gradient-right"></div>
+                    <div class="npo-header-gradient-bottom"></div>
+                </div>
+                <div class="npo-header-episode-content">
+                    <h1> Dwars Door De Week </h1>
+                    <div class="npo-header-episode-thumb">
+                        <video id="video_player" width="100%" height="100%" controls>
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <section class="npo-header-episode-meta">
+                        <h2>Dwars Door De Week</h2>
+                        <span>
+                            <p>28 okt 2017 21:45</p> &#8226;
+                            <a href="http://www.bnnvara.nl" target="_blank">BNNVARA</a> &#8226;
+                            44 min
+                            <i class="icon icon-kijkwijzer-leeftijd-al"></i>
+                            <i class="icon icon-kijkwijzer-grof_taalgebruik"></i>
+                        </span>
+
+                        <div class="npo-header-episode-meta-content">
+                            <div id="metaContent">
+                                <p class="summary_short">Satire op de zaterdagavond! Sophie Hilbrand speelt met twee bekende gasten een nieuwsquiz waarin de opvallendste gebeurtenissen van de afgelopen week worden besproken.</p>
+                                <p class="summary_long"></p>
+                                <span class="availability" data-from="2017-10-28T20:29:57Z" data-to="" data-prediction="" data-premium-from="2017-10-28T20:29:57Z" data-premium-to="" data-premium-prediction="" data-is-premium="">
+                                </span>
+                            </div>
+                        </div>
+                        <div id="npo-header-episode-read-more">
+                            <span></span>
+                        </div>
+
+                        <a href="https://www.npostart.nl/dwars-door-de-week/BV_101384492" title="" class="npo-episode-header-program-info">
+                            <img src="https://www-assets.npo.nl/uploads/media_item/media_item/225/12/dddw_guide_highlight-1525846110.png" alt=""> Dwars Door De Week >
+                        </a>
+
+                        <div class="share-footer">
+                            <div class="npo-header-episode-buttons">
+                                <npo-follow-button media_id="BV_101384492" tracking_data="[{&quot;name&quot;:&quot;volg&quot;,&quot;type&quot;:&quot;action&quot;,&quot;niveau1&quot;:&quot;afleveringen&quot;,&quot;niveau2&quot;:&quot;dwarsdoordeweek&quot;,&quot;niveau3&quot;:&quot;dwarsdoordeweek&quot;}]"></npo-follow-button>
+                                <npo-watchlist-button media-id="BV_101384779" tracking_data="[{&quot;name&quot;:&quot;kijk_later&quot;,&quot;type&quot;:&quot;action&quot;,&quot;niveau1&quot;:&quot;afleveringen&quot;,&quot;niveau2&quot;:&quot;dwarsdoordeweek&quot;,&quot;niveau3&quot;:&quot;dwarsdoordeweek&quot;}]"></npo-watchlist-button>
+                                <div class="btn secondary btn-share">Delen
+                                    <div class="npo-player-share-content" id="npo-share-content">
+                                        <div class="content">
+                                            <h3>Deel deze pagina</h3>
+                                            <ul id="npo-share" data-link="https://www.npostart.nl/BV_101384779" data-text="Bekijk Dwars Door De Week op https://www.npostart.nl/BV_101384779" data-title="Dwars Door De Week" data-niveau1="afleveringen" data-niveau2="dwarsdoordeweek" data-niveau3="dwarsdoordeweek">
+                                                <li class="facebook"><span>Facebook</span></li>
+                                                <li class="twitter"><span>Twitter</span></li>
+                                                <li class="email"><span>Email</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </header>
+
+
+        <div class="container npo-episode">
+
+            <ul class="npo-tabs">
+                <li class="npo-tab-link" id="5dea4e7c2f15b" data-title-tracking="afleveringen"><a>Afleveringen</a></li>
+                <li class="npo-tab-link" id="5dea4e7c2f15d" data-title-tracking="fragmenten"><a>Fragmenten</a></li>
+            </ul>
+
+            <script>
+                var defaultTab = '5dea4e7c2f15b';
+                var outputTabs = JSON.parse('{"5dea4e7c2f15b":["5dea4e7c2f138","5dea4e7c2f14a"],"5dea4e7c2f15d":["5dea4e7c2f14e","5dea4e7c2f150"]}');
+                for (var outputTab in outputTabs) {
+                    tabs[outputTab] = outputTabs[outputTab];
+                }
+            </script>
+
+            <div class="npo-grid" id="5dea4e7c2f138">
+                <h3></h3>
+                <div id="component-5dea4e7c2f138">
+                    <input type="hidden" name="nextLink" value="" />
+                    <input type="hidden" name="selfLink" value="/media/series/BV_101384492/episodes" />
+                    <input type="hidden" name="tileType" value="asset" />
+                    <input type="hidden" name="tileMapping" value="dedicated" />
+                    <input type="hidden" name="pageType" value="episode" />
+
+                    <div class="npo-grid-asset">
+                        <div class="npo-asset-tile-container npo-tile  active-tile   " data-id="BV_101384779">
+                            <a href="https://www.npostart.nl/dwars-door-de-week/28-10-2017/BV_101384779" class="npo-tile-link" data-radio="" data-mediatarget="" data-ts-click data-ts-name="dwarsdoordeweek" data-ts-type="navigation" data-ts-niveau1="afleveringen" data-ts-niveau2="dwarsdoordeweek" data-ts-niveau3="" data-ts-destination="BV_101384779">
+                                <div class="npo-asset-tile  selected ">
+                                    <div class="npo-asset-tile-availability" data-from="2017-10-28T20:29:57Z" data-to="" data-prediction="" data-premium-from="2017-10-28T20:29:57Z" data-premium-to="" data-premium-prediction="">
+                                    </div>
+
+                                    <div class="npo-asset-tile-timer">
+                                        44 min
+                                    </div>
+                                    <div class="npo-asset-tile-timer _short-timer">
+                                        44 min
+                                    </div>
+
+                                    <div class="npo-asset-tile-image">
+                                        <img src="https://images.poms.omroep.nl/image/s320/c320x180/967199.jpg" alt="Satire op de zaterdagavond! Sophie Hilbrand speelt met twee bekende gasten een nieuwsquiz waarin de opvallendste gebeurtenissen van de afgelopen week worden besproken."  class="thumb-fallback js-lazy-image">
+                                    </div>
+                                    <div class="npo-asset-tile-new">nieuw</div>
+                                    <div class="npo-asset-tile-play "></div>
+                                    <div class="npo-asset-tile-watched">bekeken</div>
+
+
+                                    <div class="npo-asset-tile-progress">
+                                        <div class="npo-asset-tile-progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="npo-asset-tile-title">
+                                    <h2>Dwars Door De Week</h2>
+                                    <p> Afl. 7 - 28 okt 2017 21:45 </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="npo-asset-tile-container npo-tile   " data-id="BV_101384780">
+                            <a href="https://www.npostart.nl/dwars-door-de-week/21-10-2017/BV_101384780" class="npo-tile-link" data-radio="" data-mediatarget="" data-ts-click data-ts-name="dwarsdoordeweek" data-ts-type="navigation" data-ts-niveau1="afleveringen" data-ts-niveau2="dwarsdoordeweek" data-ts-niveau3="" data-ts-destination="BV_101384780">
+                                <div class="npo-asset-tile ">
+                                    <div class="npo-asset-tile-availability" data-from="2017-10-21T20:28:30Z" data-to="" data-prediction="" data-premium-from="2017-10-21T20:28:30Z" data-premium-to="" data-premium-prediction="">
+                                    </div>
+
+                                    <div class="npo-asset-tile-timer">
+                                        43 min
+                                    </div>
+                                    <div class="npo-asset-tile-timer _short-timer">
+                                        43 min
+                                    </div>
+
+                                    <div class="npo-asset-tile-image">
+                                        <img src="https://images.poms.omroep.nl/image/s320/c320x180/964220.jpg" alt="Satire op de zaterdagavond! Sophie Hilbrand speelt met twee bekende gasten een nieuwsquiz waarin de opvallendste gebeurtenissen van de afgelopen week worden besproken."  class="thumb-fallback js-lazy-image">
+                                    </div>
+                                    <div class="npo-asset-tile-new">nieuw</div>
+                                    <div class="npo-asset-tile-play "></div>
+                                    <div class="npo-asset-tile-watched">bekeken</div>
+
+
+                                    <div class="npo-asset-tile-progress">
+                                        <div class="npo-asset-tile-progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="npo-asset-tile-title">
+                                    <h2>Dwars Door De Week</h2>
+                                    <p> Afl. 6 - 21 okt 2017 21:45 </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="npo-asset-tile-container npo-tile   " data-id="BV_101384781">
+                            <a href="https://www.npostart.nl/dwars-door-de-week/14-10-2017/BV_101384781" class="npo-tile-link" data-radio="" data-mediatarget="" data-ts-click data-ts-name="dwarsdoordeweek" data-ts-type="navigation" data-ts-niveau1="afleveringen" data-ts-niveau2="dwarsdoordeweek" data-ts-niveau3="" data-ts-destination="BV_101384781">
+                                <div class="npo-asset-tile ">
+                                    <div class="npo-asset-tile-availability" data-from="2017-10-14T20:35:28Z" data-to="" data-prediction="" data-premium-from="2017-10-14T20:35:28Z" data-premium-to="" data-premium-prediction="">
+                                    </div>
+
+                                    <div class="npo-asset-tile-timer">
+                                        42 min
+                                    </div>
+                                    <div class="npo-asset-tile-timer _short-timer">
+                                        42 min
+                                    </div>
+
+                                    <div class="npo-asset-tile-image">
+                                        <img src="https://images.poms.omroep.nl/image/s320/c320x180/961553.jpg" alt="Satire op de zaterdagavond! Sophie Hilbrand speelt met twee bekende gasten een nieuwsquiz waarin de opvallendste gebeurtenissen van de afgelopen week worden besproken."  class="thumb-fallback js-lazy-image">
+                                    </div>
+                                    <div class="npo-asset-tile-new">nieuw</div>
+                                    <div class="npo-asset-tile-play "></div>
+                                    <div class="npo-asset-tile-watched">bekeken</div>
+
+
+                                    <div class="npo-asset-tile-progress">
+                                        <div class="npo-asset-tile-progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="npo-asset-tile-title">
+                                    <h2>Dwars Door De Week</h2>
+                                    <p> Afl. 5 - 14 okt 2017 21:55 </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="npo-asset-tile-container npo-tile   " data-id="BV_101384782">
+                            <a href="https://www.npostart.nl/dwars-door-de-week/07-10-2017/BV_101384782" class="npo-tile-link" data-radio="" data-mediatarget="" data-ts-click data-ts-name="dwarsdoordeweek" data-ts-type="navigation" data-ts-niveau1="afleveringen" data-ts-niveau2="dwarsdoordeweek" data-ts-niveau3="" data-ts-destination="BV_101384782">
+                                <div class="npo-asset-tile ">
+                                    <div class="npo-asset-tile-availability" data-from="2017-10-07T21:57:34Z" data-to="" data-prediction="" data-premium-from="2017-10-07T21:57:34Z" data-premium-to="" data-premium-prediction="">
+                                    </div>
+
+                                    <div class="npo-asset-tile-timer">
+                                        44 min
+                                    </div>
+                                    <div class="npo-asset-tile-timer _short-timer">
+                                        44 min
+                                    </div>
+
+                                    <div class="npo-asset-tile-image">
+                                        <img src="https://images.poms.omroep.nl/image/s320/c320x180/958718.jpg" alt="Satire op de zaterdagavond! Sophie Hilbrand speelt met twee bekende gasten een nieuwsquiz waarin de opvallendste gebeurtenissen van de afgelopen week worden besproken."  class="thumb-fallback js-lazy-image">
+                                    </div>
+                                    <div class="npo-asset-tile-new">nieuw</div>
+                                    <div class="npo-asset-tile-play "></div>
+                                    <div class="npo-asset-tile-watched">bekeken</div>
+
+
+                                    <div class="npo-asset-tile-progress">
+                                        <div class="npo-asset-tile-progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="npo-asset-tile-title">
+                                    <h2>Dwars Door De Week</h2>
+                                    <p> Afl. 4 - 7 okt 2017 23:10 </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="npo-asset-tile-container npo-tile   " data-id="BV_101384783">
+                            <a href="https://www.npostart.nl/dwars-door-de-week/30-09-2017/BV_101384783" class="npo-tile-link" data-radio="" data-mediatarget="" data-ts-click data-ts-name="dwarsdoordeweek" data-ts-type="navigation" data-ts-niveau1="afleveringen" data-ts-niveau2="dwarsdoordeweek" data-ts-niveau3="" data-ts-destination="BV_101384783">
+                                <div class="npo-asset-tile ">
+                                    <div class="npo-asset-tile-availability" data-from="2017-09-30T21:33:16Z" data-to="" data-prediction="" data-premium-from="2017-09-30T21:33:16Z" data-premium-to="" data-premium-prediction="">
+                                    </div>
+
+                                    <div class="npo-asset-tile-timer">
+                                        42 min
+                                    </div>
+                                    <div class="npo-asset-tile-timer _short-timer">
+                                        42 min
+                                    </div>
+
+                                    <div class="npo-asset-tile-image">
+                                        <img src="https://images.poms.omroep.nl/image/s320/c320x180/955798.jpg" alt="Satire op de zaterdagavond! Sophie Hilbrand speelt met twee bekende gasten een nieuwsquiz waarin de opvallendste gebeurtenissen van de afgelopen week worden besproken."  class="thumb-fallback js-lazy-image">
+                                    </div>
+                                    <div class="npo-asset-tile-new">nieuw</div>
+                                    <div class="npo-asset-tile-play "></div>
+                                    <div class="npo-asset-tile-watched">bekeken</div>
+
+
+                                    <div class="npo-asset-tile-progress">
+                                        <div class="npo-asset-tile-progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="npo-asset-tile-title">
+                                    <h2>Dwars Door De Week</h2>
+                                    <p> Afl. 3 - 30 sep 2017 21:45 </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="npo-asset-tile-container npo-tile   " data-id="BV_101384784">
+                            <a href="https://www.npostart.nl/dwars-door-de-week/23-09-2017/BV_101384784" class="npo-tile-link" data-radio="" data-mediatarget="" data-ts-click data-ts-name="dwarsdoordeweek" data-ts-type="navigation" data-ts-niveau1="afleveringen" data-ts-niveau2="dwarsdoordeweek" data-ts-niveau3="" data-ts-destination="BV_101384784">
+                                <div class="npo-asset-tile ">
+                                    <div class="npo-asset-tile-availability" data-from="2017-09-23T20:27:51Z" data-to="" data-prediction="" data-premium-from="2017-09-23T20:27:52Z" data-premium-to="" data-premium-prediction="">
+                                    </div>
+
+                                    <div class="npo-asset-tile-timer">
+                                        38 min
+                                    </div>
+                                    <div class="npo-asset-tile-timer _short-timer">
+                                        38 min
+                                    </div>
+
+                                    <div class="npo-asset-tile-image">
+                                        <img src="https://images.poms.omroep.nl/image/s320/c320x180/952886.jpg" alt="Satire op de zaterdagavond! Sophie Hilbrand speelt met twee bekende gasten een nieuwsquiz waarin de opvallendste gebeurtenissen van de afgelopen week worden besproken."  class="thumb-fallback js-lazy-image">
+                                    </div>
+                                    <div class="npo-asset-tile-new">nieuw</div>
+                                    <div class="npo-asset-tile-play "></div>
+                                    <div class="npo-asset-tile-watched">bekeken</div>
+
+
+                                    <div class="npo-asset-tile-progress">
+                                        <div class="npo-asset-tile-progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="npo-asset-tile-title">
+                                    <h2>Dwars Door De Week</h2>
+                                    <p> Afl. 2 - 23 sep 2017 21:45 </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="npo-asset-tile-container npo-tile   " data-id="BV_101384785">
+                            <a href="https://www.npostart.nl/dwars-door-de-week/16-09-2017/BV_101384785" class="npo-tile-link" data-radio="" data-mediatarget="" data-ts-click data-ts-name="dwarsdoordeweek" data-ts-type="navigation" data-ts-niveau1="afleveringen" data-ts-niveau2="dwarsdoordeweek" data-ts-niveau3="" data-ts-destination="BV_101384785">
+                                <div class="npo-asset-tile ">
+                                    <div class="npo-asset-tile-availability" data-from="2017-09-16T20:28:39Z" data-to="" data-prediction="" data-premium-from="2017-09-16T20:28:39Z" data-premium-to="" data-premium-prediction="">
+                                    </div>
+
+                                    <div class="npo-asset-tile-timer">
+                                        41 min
+                                    </div>
+                                    <div class="npo-asset-tile-timer _short-timer">
+                                        41 min
+                                    </div>
+
+                                    <div class="npo-asset-tile-image">
+                                        <img src="https://images.poms.omroep.nl/image/s320/c320x180/949937.jpg" alt="Satirisch programma. Sophie Hilbrand speelt met twee bekende gasten een nieuwsquiz waarin de opvallendste gebeurtenissen van de afgelopen week worden besproken."  class="thumb-fallback js-lazy-image">
+                                    </div>
+                                    <div class="npo-asset-tile-new">nieuw</div>
+                                    <div class="npo-asset-tile-play "></div>
+                                    <div class="npo-asset-tile-watched">bekeken</div>
+
+
+                                    <div class="npo-asset-tile-progress">
+                                        <div class="npo-asset-tile-progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="npo-asset-tile-title">
+                                    <h2>Dwars Door De Week</h2>
+                                    <p> Afl. 1 - 16 sep 2017 21:45 </p>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="npo-grid" id="5dea4e7c2f14e">
+                <h3></h3>
+                <div id="component-5dea4e7c2f14e">
+                    <input type="hidden" name="nextLink" value="" />
+                    <input type="hidden" name="selfLink" value="/media/series/BV_101384492/fragments" />
+                    <input type="hidden" name="tileType" value="asset" />
+                    <input type="hidden" name="tileMapping" value="dedicated" />
+                    <input type="hidden" name="pageType" value="episode" />
+                </div>
+            </div>
+
+            <div id="5dea4e7c2f150" class="load-more">
+                <a title="Toon meer" class="load-more-button load-more-grid" data-target="5dea4e7c2f14e">Toon meer</a>
+            </div>
+
+            <footer class="npo-footer">
+                <div class="npo-footer-columns">
+                    <div class="npo-footer-section col-three-seven">
+                        <h5>Omroepen</h5>
+                        <ul>
+                            <li><a href="https://www.avrotros.nl/" data-ts-click data-ts-name="avrotros" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="AVROTROS">AVROTROS</a></li>
+                            <li><a href="https://www.bnnvara.nl/" data-ts-click data-ts-name="bnnvara" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="">BNNVARA</a></li>
+                            <li><a href="https://www.eo.nl/" data-ts-click data-ts-name="eo" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="">EO</a></li>
+                            <li><a href="https://www.human.nl/" data-ts-click data-ts-name="human" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="">Human</a></li>
+                            <li><a href="https://www.kro-ncrv.nl/" data-ts-click data-ts-name="kro-ncrv" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="">KRO-NCRV</a></li>
+                            <li><a href="https://www.omroepmax.nl/" data-ts-click data-ts-name="max" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="">MAX</a></li>
+                            <li><a href="https://www.nos.nl/" data-ts-click data-ts-name="nos" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="">NOS</a></li>
+                            <li><a href="https://www.ntr.nl/" data-ts-click data-ts-name="ntr" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="">NTR</a></li>
+                            <li><a href="https://www.powned.tv/" data-ts-click data-ts-name="powned" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="">PowNed</a></li>
+                            <li><a href="https://www.vpro.nl/" data-ts-click data-ts-name="vpro" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="">VPRO</a></li>
+                            <li><a href="https://www.wnl.tv/" data-ts-click data-ts-name="wnl" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="">WNL</a></li>
+                        </ul>
+                    </div>
+                    <div class="npo-footer-section col-one-seven">
+                        <h5>Organisatie</h5>
+                        <ul>
+                            <li><a href="https://over.npo.nl/" data-ts-click data-ts-name="over npo" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Over NPO">Over NPO</a></li>
+                            <li><a href="https://werkenbijnpo.nl" data-ts-click data-ts-name="werken bij npo" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Werken bij NPO">Werken bij NPO</a></li>
+                            <li><a href="https://pers.npo.nl/" data-ts-click data-ts-name="pers" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Pers">Pers</a></li>
+                            <li><a href="https://service.npo.nl/" data-ts-click data-ts-name="vraag en antwoord" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Vraag en antwoord">Vraag en antwoord</a></li>
+                        </ul>
+                    </div>
+                    <div class="npo-footer-section col-two-seven">
+                        <h5>Ook NPO</h5>
+                        <ul>
+                            <li><a href="https://www.zappelin.nl/" data-ts-click data-ts-name="zappelin" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Zappelin">Zappelin</a></li>
+                            <li><a href="https://www.zapp.nl/" data-ts-click data-ts-name="zapp" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Zapp">Zapp</a></li>
+                            <li><a href="https://www.npo3.nl/" data-ts-click data-ts-name="npo3" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="NPO 3">NPO 3</a></li>
+                            <li><a href="https://www.bvn.tv/" data-ts-click data-ts-name="bvn" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="BVN">BVN</a></li>
+                            <li><a href="https://service.npo.nl/vragen/17" data-ts-click data-ts-name="npoextra" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="BVN">NPO extra</a></li>
+                            <li><a href="https://www.npocampus.nl/" data-ts-click data-ts-name="npocampus" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="NPO Campus">NPO Campus</a></li>
+                            <li><a href="https://www.npofocus.nl/" data-ts-click data-ts-name="npofocus" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="NPO Focus">NPO Focus</a></li>
+                            <li><a href="https://over.npo.nl/npo-fonds" data-ts-click data-ts-name="npofonds" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="NPO-fonds">NPO-fonds</a></li>
+                            <li><a href="https://over.npo.nl/ombudsman" data-ts-click data-ts-name="ombudsman" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Ombudsman">Ombudsman</a></li>
+                            <li><a href="https://www.netinnederland.nl/" data-ts-click data-ts-name="netinnederland" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Net in Nederland">Net in Nederland</a></li>
+                        </ul>
+                    </div>
+                    <div class="npo-footer-section col-one-seven">
+                        <h5>Volg de NPO</h5>
+                        <ul>
+                            <li><a href="https://itunes.apple.com/nl/app/uitzending-gemist/id323998316?mt=8" data-ts-click data-ts-name="ipad-iphone" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="iPad en iPhone">iPad & iPhone</a></li>
+                            <li><a href="https://play.google.com/store/apps/details?id=nl.uitzendinggemist" data-ts-click data-ts-name="android" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Android">Android</a></li>
+                            <li><a href="https://instagram.com/npo.nl" data-ts-click data-ts-name="instagram" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Instagram">Instagram</a></li>
+                            <li><a href="https://facebook.com/npostart" data-ts-click data-ts-name="facebook" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Facebook">Facebook</a></li>
+                            <li><a href="https://omroep.dmd.omroep.nl/x/plugin/?pName=subscribe&MIDRID=S7Y1swQAA98&pLang=nl&Z=543417650" data-ts-click data-ts-name="nieuwsbrief" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Nieuwsbrief">Nieuwsbrief</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="npo-footer-group-links">
+                    <div class="npo-footer-links">
+                        <a href="/algemene-voorwaarden-privacy" data-ts-click data-ts-name="algemene voorwaarden en privacy" data-ts-type="navigation" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" title="Algemene voorwaarden en privacy">Algemene voorwaarden & Privacy</a>
+                        <a href="/npo-id-gebruiksvoorwaarden" data-ts-click data-ts-name="npo id gebruiksvoorwaarden" data-ts-type="navigation" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" title="NPO id Gebruiksvoorwaarden">NPO id Gebruiksvoorwaarden</a>
+                        <a href="https://www.npostart.nl/npo-start-plus-gebruiksvoorwaarden" data-ts-click data-ts-name="npo plus gebruiksvoorwaarden" data-ts-type="navigation" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" title="NPO Start Plus Gebruiksvoorwaarden">NPO Start Plus Gebruiksvoorwaarden</a>
+                        <a href="#" class="npo_cc_settings_link" data-ts-click data-ts-name="cookiebeleid" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Cookiebeleid">Cookiebeleid</a>
+                        <a href="https://www.ster.nl/" data-ts-click data-ts-name="informatie over adverteren" data-ts-type="exit" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" target="_blank" rel="noopener" title="Informatie over adverteren">Informatie over adverteren</a>
+                    </div>
+                    <a href="https://www.npostart.nl" data-ts-click data-ts-name="npo_logo" data-ts-type="navigation" data-ts-niveau1="home" data-ts-niveau2="" data-ts-niveau3="" title="NPO" class="npo-footer-logo"><img src="../images/npo_logo_40x40.png" alt="NPO"></a>
+                </div>
+            </footer>
+        </div>
+
+        <npo-toast></npo-toast>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://www.npostart.nl/js/app.js?v=release-1.56.0" type="text/javascript"></script>
+    <script>
+        var getAccountProfile = function(callback) {
+            if (document.cookie.indexOf("isAuthenticatedUser=") >= 0) {
+                $.get('/account-profile').then(function(response) {
+                    if (typeof(response.accountId) !== 'undefined') {
+                        accountProfile = response;
+                    }
+                    if (callback) {
+                        callback(response);
+                    }
+                });
+            } else if (callback) {
+                callback();
+            }
+        };
+    </script>
+    <script>
+        var NPOlabels = {
+            "pagina": "BV_101384779",
+            "niveau1": "afleveringen",
+            "niveau2": "dwarsdoordeweek",
+            "niveau3": "dwarsdoordeweek",
+            "omgeving": "prod",
+            "merkId": 4,
+            "merk": "npoportal",
+            "platform": "site",
+            "omroep": "bnnvara",
+            "programma": "dwarsdoordeweek",
+            "merkType": "portal",
+            "nobo": {
+                "eventType": "index",
+                "mediaType": "videostream"
+            },
+            "omroeplabel1": null,
+            "omroeplabel2": null,
+            "omroeplabel3": null,
+            "omroeplabel4": null,
+            "omroeplabel5": null,
+            "zoek": null,
+            "platformVersie": "release-1.56.0"
+        };
+    </script>
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '/styles/main.css?v=release-1.56.0';
+        link.type = 'text/css';
+
+        var parent = document.getElementsByTagName('link')[0];
+        parent.parentNode.insertBefore(link, parent);
+    </script>
+    <script>
+        $(function() {
+            jQuery.cachedScript = function(url, options) {
+                options = $.extend(options || {}, {
+                    dataType: "script",
+                    cache: true,
+                    url: url
+                });
+
+                return jQuery.ajax(options);
+            };
+
+            var setNPOUser = function(account) {
+                var user = {
+                    npoId: (account.usePersonalisedServices) ? account.accountId : null,
+                    npoType: account.subscriptionId === 'npoplus' ? 'betaald' : 'geregistreerd',
+                    profielId: (account.usePersonalisedServices) ? account.profileId : null
+                };
+                NPO.setUser(user);
+                NPO.page();
+            };
+
+            var waitForTemplates = function() {
+                if (typeof placeholdersLoaded !== 'undefined' && !placeholdersLoaded) {
+                    document.addEventListener('placeholders_loaded', function(e) {
+                        placeholdersLoaded = true;
+                        waitForTemplates();
+                    }, false);
+                    return false;
+                }
+                var indexTemplates = function(parent) {
+                    var templates = $(parent).find('[data-topspin-is-templated]');
+                    if (templates.length === 0) {
+                        return;
+                    }
+
+                    var supportedPlaceholders = ['{?index}'];
+                    var placeholderNumber = -1;
+                    $(templates).each(function(key, template) {
+                        $(template).removeAttr('data-topspin-is-templated');
+                        if (!template.hasAttribute('data-ts-panel')) {
+                            return;
+                        }
+                        if ($(template).find('.npo-tile').length === 0) {
+                            $(template).removeAttr('data-ts-panel')
+                                .removeAttr('data-topspin-is-templated')
+                                .removeAttr('data-ts-source');
+                            return;
+                        }
+                        var panel = template.getAttribute('data-ts-panel');
+                        supportedPlaceholders.forEach(function(placeholder) {
+                            $(template).attr('data-ts-panel', panel.replace(placeholder, ++placeholderNumber))
+                        });
+                    });
+                };
+
+                //we index switcher tiles at first
+                $('.switch-input').each(function(key, switcher) {
+                    var components = $(switcher).data('components');
+                    if (typeof(components) !== 'undefined') {
+                        indexTemplates('#' + components.join(', #'));
+                    }
+                });
+                //the next we index tab tiles
+                if (tabs && !$.isEmptyObject(tabs)) {
+                    for (var tabKey in tabs) {
+                        indexTemplates('#' + tabs[tabKey].join(', #'));
+                    }
+                }
+
+                //index others elements on the page
+                indexTemplates(document);
+
+                initialiseNPOTracking();
+            };
+
+            var initialiseNPOTracking = function() {
+                jQuery.cachedScript(location.protocol + '//assets.npo-data.nl/tag/v3/npotag.js').done(function() {
+                    if (typeof(accountProfile) !== 'object') {
+                        getAccountProfile(function(response) {
+                            if (typeof(response) !== 'undefined' && typeof(response.accountId) !== 'undefined') {
+                                setNPOUser(response);
+                            } else {
+                                NPO.setUser({
+                                    npoId: null,
+                                    profielId: null,
+                                    npoType: 'anoniem'
+                                });
+                                NPO.page();
+                            }
+                        });
+                    } else {
+                        setNPOUser(accountProfile);
+                    }
+                });
+            };
+
+            $.ajax({
+                url: 'https://www.npostart.nl/topspin/cookie',
+                xhrFields: {
+                    withCredentials: true
+                }
+            }).done(function(cookieValue) {
+                if (cookieValue) {
+                    var d = new Date();
+                    var c = new Date(d.getFullYear() + 5, d.getMonth(), d.getDay());
+                    document.cookie = '_dvp=' + cookieValue + '; expires=' + c.toUTCString() + '; path=/';
+                }
+
+                waitForTemplates();
+            });
+        });
+    </script>
+    <npo-terms-accept></npo-terms-accept>
+    <npo-amber-alert url=https://media.amberalert.nl/xml/combined/index.xml> </npo-amber-alert> <div class="hidden-item-props">
+        <div itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+            <a itemprop="url" href="https://www.npostart.nl" title="NPO"> <span itemprop="title">NPO</span>
+            </a> </div>
+        <div itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+            <a itemprop="url" href="https://www.npostart.nl/dwars-door-de-week/BV_101384779" title="Dwars Door De Week"> <span itemprop="title">Dwars Door De Week</span>
+            </a> </div>
+        <div itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+            <a itemprop="url" href="https://www.npostart.nl/dwars-door-de-week/28-10-2017/BV_101384779" title="Dwars Door De Week"> <span itemprop="title">Dwars Door De Week</span>
+            </a> </div>
+        </div>
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "url": "https://www.npostart.nl",
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://www.npostart.nl/zoeken?term={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
+            }
+        </script>
+</body>
+
 </html>
