@@ -1,0 +1,21 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title= title
+  link(rel='shortcut icon' href='#')
+#watch-container
+  iframe(width='560' height='315' src='https://www.youtube.com/embed/UFIoRLqhFpo' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
+  #watch-description-container
+    #title= title
+    p#upload-date Gisteren 20:55 &bull; EO &bull; 40 min
+    p#description
+      | Tygo ziet hoe het leven eruit kan zien als je een psychiatrisch label
+      | draagt. Bij Jason zijn vanaf zijn elfe verkeerde diagnoses gesteld.
+    #personalised-buttons
+      button(onclick='') Volgen
+      button(onclick='') Kijk later
+      button(onclick='') Delen
+  #watch-options-container
+    #recommended-watch-options-container
+      each program in programs
+        div= program.title
